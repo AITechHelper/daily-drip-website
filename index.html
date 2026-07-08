@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Dr!p — Colombian Specialty Coffee</title>
+<meta name="description" content="Premium Colombian specialty coffee. Small-batch espresso beans and ground coffee, roasted with intention.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0908;
+    --black-soft: #12110f;
+    --green: #2f3628;
+    --green-deep: #232a1e;
+    --gold: #c9a962;
+    --gold-bright: #e2c887;
+    --gold-dim: #8a7440;
+    --cream: #ece5d8;
+    --cream-dim: #a89f8e;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--gold); color: var(--black); }
+
+  /* ---------- Nav ---------- */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 5vw;
+    transition: background .5s ease, padding .5s ease, backdrop-filter .5s ease;
+  }
+  nav.scrolled {
+    padding: 16px 5vw;
+    background: rgba(10, 9, 8, 0.82);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(201, 169, 98, 0.12);
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+  .nav-logo img {
+    height: 52px;
+    width: 52px;
+    border-radius: 50%;
+    transition: transform .4s ease;
+  }
+  .nav-logo:hover img { transform: scale(1.05); }
+  .nav-links { display: flex; gap: 42px; align-items: center; }
+  .nav-links a {
+    color: var(--cream-dim);
+    text-decoration: none;
+    font-size: .78rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    transition: color .3s;
+  }
+  .nav-links a:hover { color: var(--gold-bright); }
+  .nav-cta {
+    border: 1px solid var(--gold-dim);
+    padding: 10px 24px;
+    color: var(--gold) !important;
+    transition: background .3s, color .3s !important;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--black) !important; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 120px 6vw 40px;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  /* ambient light plates */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: -20%;
+    z-index: -2;
+    background:
+      radial-gradient(ellipse 55% 45% at 50% 118%, rgba(201,169,98,.20), transparent 65%),
+      radial-gradient(ellipse 40% 38% at 12% 8%, rgba(47,54,40,.55), transparent 70%),
+      radial-gradient(ellipse 42% 40% at 88% 14%, rgba(47,54,40,.4), transparent 70%),
+      var(--black);
+  }
+  .hero-glow {
+    position: absolute;
+    z-index: -1;
+    width: 720px; height: 720px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(226,200,135,.10) 0%, rgba(201,169,98,.05) 38%, transparent 68%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -46%);
+    animation: breathe 7s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes breathe {
+    0%, 100% { opacity: .75; transform: translate(-50%, -46%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -46%) scale(1.07); }
+  }
+  .hero-eyebrow {
+    font-size: .74rem;
+    letter-spacing: .5em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 30px;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(3rem, 8.5vw, 7.5rem);
+    line-height: 1.04;
+    letter-spacing: .01em;
+    max-width: 14ch;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-bright);
+  }
+  .hero p {
+    margin-top: 34px;
+    max-width: 46ch;
+    color: var(--cream-dim);
+    font-size: 1.02rem;
+  }
+  .hero-actions { margin-top: 48px; display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; }
+  .btn {
+    display: inline-block;
+    text-decoration: none;
+    font-size: .78rem;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    padding: 17px 42px;
+    transition: all .35s ease;
+  }
+  .btn-gold {
+    background: var(--gold);
+    color: var(--black);
+    font-weight: 500;
+  }
+  .btn-gold:hover { background: var(--gold-bright); box-shadow: 0 0 44px rgba(201,169,98,.35); }
+  .btn-ghost {
+    border: 1px solid rgba(236,229,216,.22);
+    color: var(--cream);
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold-bright); }
+
+  .scroll-cue {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 48px;
+    color: var(--cream-dim);
+    font-size: .66rem;
+    letter-spacing: .34em;
+    text-transform: uppercase;
+  }
+  .scroll-cue::after {
+    content: '';
+    width: 1px; height: 52px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: cueDrop 2.4s ease-in-out infinite;
+  }
+  @keyframes cueDrop {
+    0% { transform: scaleY(0); transform-origin: top; }
+    45% { transform: scaleY(1); transform-origin: top; }
+    55% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* ---------- Shared section bits ---------- */
+  section { position: relative; padding: 140px 6vw; }
+  .eyebrow {
+    font-size: .72rem;
+    letter-spacing: .44em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 22px;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(2.1rem, 4.4vw, 3.6rem);
+    line-height: 1.12;
+  }
+  .section-title em { font-style: italic; color: var(--gold-bright); }
+
+  /* fade-in on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 1s cubic-bezier(.22,.61,.36,1), transform 1s cubic-bezier(.22,.61,.36,1);
+  }
+  .reveal.in { opacity: 1; transform: none; }
+  .reveal-d1 { transition-delay: .12s; }
+  .reveal-d2 { transition-delay: .24s; }
+  .reveal-d3 { transition-delay: .36s; }
+
+  /* ---------- Story / parallax ---------- */
+  .story {
+    background: linear-gradient(to bottom, var(--black), var(--green-deep) 55%, var(--black));
+  }
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8vw;
+    align-items: center;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .story-copy p {
+    color: var(--cream-dim);
+    margin-top: 26px;
+    max-width: 50ch;
+  }
+  .story-stats {
+    display: flex;
+    gap: 56px;
+    margin-top: 52px;
+  }
+  .stat b {
+    display: block;
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 2.4rem;
+    color: var(--gold-bright);
+    line-height: 1;
+  }
+  .stat span {
+    display: block;
+    margin-top: 10px;
+    font-size: .7rem;
+    letter-spacing: .26em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+  }
+  .story-visual-wrap {
+    position: relative;
+  }
+  .story-visual {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+  }
+  .story-visual img {
+    position: absolute;
+    inset: -12% 0;
+    width: 100%;
+    height: 124%;
+    object-fit: cover;
+    object-position: center 32%;
+    will-change: transform;
+    filter: saturate(.85) contrast(1.04);
+  }
+  .story-visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 0 1px rgba(201,169,98,.28), inset 0 0 120px rgba(10,9,8,.55);
+    pointer-events: none;
+  }
+  .story-visual-frame {
+    position: absolute;
+    inset: 18px;
+    border: 1px solid rgba(201,169,98,.35);
+    pointer-events: none;
+    z-index: 2;
+  }
+  /* ---------- Meet Fern ---------- */
+  .meet { background: var(--black); }
+  .meet-grid {
+    display: grid;
+    grid-template-columns: minmax(240px, 360px) 1fr;
+    gap: 8vw;
+    align-items: center;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  .meet-visual {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+  }
+  .meet-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    filter: saturate(.9) contrast(1.03);
+  }
+  .meet-visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 0 1px rgba(201,169,98,.28), inset 0 0 100px rgba(10,9,8,.5);
+    pointer-events: none;
+  }
+  .meet-visual-frame {
+    position: absolute;
+    inset: 16px;
+    border: 1px solid rgba(201,169,98,.35);
+    pointer-events: none;
+  }
+  .meet-quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.5rem, 3vw, 2.3rem);
+    line-height: 1.35;
+    color: var(--cream);
+    margin-top: 20px;
+  }
+  .meet-attr {
+    margin-top: 26px;
+    font-size: .8rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+  }
+  @media (max-width: 900px) {
+    .meet-grid { grid-template-columns: 1fr; gap: 40px; }
+    .meet-visual { max-width: 320px; margin: 0 auto; }
+  }
+
+  /* ---------- Products ---------- */
+  .products { text-align: center; }
+  .products::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: min(900px, 90vw); height: 500px;
+    background: radial-gradient(ellipse at top, rgba(47,54,40,.5), transparent 70%);
+    pointer-events: none;
+  }
+  .products .section-title { margin: 0 auto; max-width: 20ch; }
+  .products-sub {
+    color: var(--cream-dim);
+    max-width: 52ch;
+    margin: 24px auto 0;
+  }
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 420px));
+    justify-content: center;
+    gap: 44px;
+    margin-top: 90px;
+  }
+  .card {
+    position: relative;
+    background: linear-gradient(168deg, var(--black-soft), #0d0f0a 60%, var(--black));
+    border: 1px solid rgba(201,169,98,.14);
+    padding: 56px 40px 46px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--cream);
+    transition: transform .55s cubic-bezier(.22,.61,.36,1), border-color .55s, box-shadow .55s;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(201,169,98,.45);
+    box-shadow: 0 34px 70px -28px rgba(0,0,0,.85), 0 0 60px -18px rgba(201,169,98,.22);
+  }
+  /* glowing white ambient light behind the bag */
+  .card-stage {
+    position: relative;
+    height: 340px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+  .card-stage::before {
+    content: '';
+    position: absolute;
+    top: 46%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,.34) 0%, rgba(255,252,240,.14) 42%, transparent 70%);
+    filter: blur(6px);
+    transition: opacity .6s, transform .6s;
+    opacity: .8;
+    z-index: 0;
+  }
+  .card:hover .card-stage::before {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.12);
+  }
+  .card-stage::after {
+    /* soft floor shadow under the bag */
+    content: '';
+    position: absolute;
+    bottom: -6px; left: 50%;
+    transform: translateX(-50%);
+    width: 180px; height: 26px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(0,0,0,.75), transparent 70%);
+    z-index: 2;
+  }
+  .card-stage img {
+    position: relative;
+    z-index: 1;
+    max-height: 330px;
+    max-width: 82%;
+    object-fit: contain;
+    filter: drop-shadow(0 24px 34px rgba(0,0,0,.6));
+    transition: transform .6s cubic-bezier(.22,.61,.36,1);
+  }
+  .card:hover .card-stage img { transform: translateY(-8px) scale(1.03); }
+  .card-type {
+    font-size: .66rem;
+    letter-spacing: .4em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .card h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.9rem;
+    margin-top: 14px;
+    line-height: 1.15;
+  }
+  .card-desc {
+    color: var(--cream-dim);
+    font-size: .92rem;
+    margin-top: 12px;
+    min-height: 2.6em;
+  }
+  .card-rule {
+    width: 44px; height: 1px;
+    background: var(--gold-dim);
+    margin: 26px auto;
+    transition: width .5s;
+  }
+  .card:hover .card-rule { width: 90px; }
+  .card-price {
+    font-family: var(--serif);
+    font-size: 1.55rem;
+    color: var(--gold-bright);
+  }
+  .card-link {
+    display: inline-block;
+    margin-top: 24px;
+    font-size: .72rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    transition: color .35s;
+  }
+  .card:hover .card-link { color: var(--gold-bright); }
+  .card-link::after { content: ' →'; }
+
+  /* ---------- Craft band ---------- */
+  .craft {
+    background: linear-gradient(to bottom, var(--black), #0e100b);
+  }
+  .craft-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: rgba(201,169,98,.14);
+    border: 1px solid rgba(201,169,98,.14);
+    max-width: 1280px;
+    margin: 80px auto 0;
+  }
+  .craft-cell {
+    background: var(--black);
+    padding: 56px 44px;
+    transition: background .5s;
+  }
+  .craft-cell:hover { background: var(--black-soft); }
+  .craft-cell .num {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--gold-dim);
+    font-size: 1.1rem;
+  }
+  .craft-cell h4 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.45rem;
+    margin-top: 18px;
+  }
+  .craft-cell p {
+    color: var(--cream-dim);
+    font-size: .92rem;
+    margin-top: 14px;
+  }
+  .craft-header { max-width: 1280px; margin: 0 auto; }
+
+  /* ---------- CTA ---------- */
+  .cta {
+    text-align: center;
+    padding: 180px 6vw;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(ellipse 60% 70% at 50% 100%, rgba(201,169,98,.14), transparent 70%),
+      radial-gradient(ellipse 50% 50% at 50% 0%, rgba(47,54,40,.45), transparent 70%);
+  }
+  .cta .section-title { max-width: 18ch; margin: 0 auto; }
+  .cta p { color: var(--cream-dim); margin: 26px auto 0; max-width: 44ch; }
+  .cta .btn { margin-top: 46px; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    border-top: 1px solid rgba(201,169,98,.12);
+    padding: 44px 5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    color: var(--cream-dim);
+    font-size: .78rem;
+    letter-spacing: .1em;
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+  footer a:hover { color: var(--gold-bright); }
+
+  @media (max-width: 900px) {
+    .nav-links a:not(.nav-cta) { display: none; }
+    .story-grid { grid-template-columns: 1fr; gap: 60px; }
+    .story-stats { gap: 36px; flex-wrap: wrap; }
+    section { padding: 100px 6vw; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .hero-glow, .scroll-cue::after { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="nav-logo" href="#"><img src="logo.jpg" alt="Daily Dr!p"></a>
+  <div class="nav-links">
+    <a href="#story">Our Story</a>
+    <a href="#products">Coffee</a>
+    <a href="#craft">Craft</a>
+    <a class="nav-cta" href="https://daily-dr-p.myshopify.com" target="_blank" rel="noopener">Shop</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-glow"></div>
+  <p class="hero-eyebrow reveal in">Colombian Specialty Coffee</p>
+  <h1 class="reveal in">A brew<br><em>with purpose.</em></h1>
+  <p class="reveal in reveal-d1">Small-batch Colombian coffee, sourced at origin and roasted for depth. Dark, rich, and unhurried — the way a morning should begin.</p>
+  <div class="hero-actions reveal in reveal-d2">
+    <a class="btn btn-gold" href="#products">Explore the Coffee</a>
+    <a class="btn btn-ghost" href="#story">Our Story</a>
+  </div>
+  <div class="scroll-cue">Scroll</div>
+</header>
+
+<section class="story" id="story">
+  <div class="story-grid">
+    <div class="story-copy">
+      <p class="eyebrow reveal">Our Story</p>
+      <h2 class="section-title reveal">A father, a daughter,<br><em>and a calling.</em></h2>
+      <p class="reveal reveal-d1">Daily Dr!p started with Fern and her father — a pastor who has spent his life in ministry, and a daughter who works alongside him. Coffee became their next act of service: something to build together, rooted in the same faith that has always shaped their family.</p>
+      <p class="reveal reveal-d2">Every bag carries that purpose forward. Fern and her dad started this business to help families walking through a cancer diagnosis — because a cup of coffee, shared with intention, can be part of someone's healing.</p>
+      <div class="story-stats reveal reveal-d3">
+        <div class="stat"><b>Father</b><span>&amp; Daughter Run</span></div>
+        <div class="stat"><b>Faith</b><span>Rooted in Ministry</span></div>
+        <div class="stat"><b>Purpose</b><span>Supporting Families with Cancer</span></div>
+      </div>
+    </div>
+    <div class="story-visual reveal reveal-d1">
+      <img data-parallax src="father-daughter.jpg" alt="Fern and her father, co-founders of Daily Dr!p">
+      <div class="story-visual-frame"></div>
+    </div>
+  </div>
+</section>
+
+<section class="meet">
+  <div class="meet-grid">
+    <div class="meet-visual reveal">
+      <img src="fern.jpg" alt="Fern, co-founder of Daily Dr!p">
+      <div class="meet-visual-frame"></div>
+    </div>
+    <div class="meet-copy">
+      <p class="eyebrow reveal reveal-d1">The Face Behind the Brew</p>
+      <p class="meet-quote reveal reveal-d2">&ldquo;Ministry taught me how to serve people well. Now I get to do it one cup at a time.&rdquo;</p>
+      <p class="meet-attr reveal reveal-d3">&mdash; Fern, Co-Founder</p>
+    </div>
+  </div>
+</section>
+
+<section class="products" id="products">
+  <p class="eyebrow reveal">The Collection</p>
+  <h2 class="section-title reveal">Two roasts. <em>No compromises.</em></h2>
+  <p class="products-sub reveal reveal-d1">Whole bean for the ritualists, ground for the ready. Both roasted dark, both unmistakably Colombian.</p>
+  <div class="product-grid" id="productGrid"><!-- products injected here --></div>
+</section>
+
+<section class="craft" id="craft">
+  <div class="craft-header">
+    <p class="eyebrow reveal">The Craft</p>
+    <h2 class="section-title reveal">Quality is a <em>chain of small decisions.</em></h2>
+  </div>
+  <div class="craft-grid">
+    <div class="craft-cell reveal"><span class="num">No. 01</span><h4>Sourced at Origin</h4><p>Direct relationships with Colombian growers — beans selected at the farm, not from a catalog.</p></div>
+    <div class="craft-cell reveal reveal-d1"><span class="num">No. 02</span><h4>Roasted in Small Batches</h4><p>Medium-dark profiles developed slowly to bring out chocolate and caramel without a trace of char.</p></div>
+    <div class="craft-cell reveal reveal-d2"><span class="num">No. 03</span><h4>Sealed at Peak</h4><p>Bagged within hours of roasting so what arrives at your door tastes like it just left the drum.</p></div>
+  </div>
+</section>
+
+<section class="cta">
+  <p class="eyebrow reveal">Begin the Ritual</p>
+  <h2 class="section-title reveal">Your best cup is <em>one bag away.</em></h2>
+  <p class="reveal reveal-d1">Ships fresh from the roaster. Brewed best without hurry.</p>
+  <a class="btn btn-gold reveal reveal-d2" href="https://daily-dr-p.myshopify.com" target="_blank" rel="noopener">Shop Daily Dr!p</a>
+</section>
+
+<footer>
+  <span>© 2026 Daily Dr!p — Colombian Specialty Coffee</span>
+  <span><a href="https://daily-dr-p.myshopify.com" target="_blank" rel="noopener">daily-dr-p.myshopify.com</a></span>
+</footer>
+
+<script>
+/* ---------------------------------------------------------------
+   Product data — synced from the Shopify storefront API
+   (https://daily-dr-p.myshopify.com/products.json).
+   Shopify does not send CORS headers on that endpoint, so the data
+   is baked in at build time; a live fetch is attempted anyway and
+   silently refreshes prices/titles if it ever succeeds (e.g. when
+   this page is hosted behind a proxy or on the same domain).
+---------------------------------------------------------------- */
+const STORE = 'https://daily-dr-p.myshopify.com';
+let PRODUCTS = [
+  {
+    handle: 'espresso-beans',
+    title: 'Espresso Beans',
+    type: 'Whole Bean',
+    desc: '1 lb (16 oz) whole bean espresso',
+    price: '16.00',
+    image: 'https://cdn.shopify.com/s/files/1/0685/2938/9638/files/espressobagpic.png?v=1783133520'
+  },
+  {
+    handle: 'ground-coffee',
+    title: 'Latin Blend',
+    type: 'Ground Coffee',
+    desc: 'Medium–dark roast, ground coffee',
+    price: '15.00',
+    image: 'https://cdn.shopify.com/s/files/1/0685/2938/9638/files/0561896E-BEE5-4B43-A835-CDF106A95B04.png?v=1765569606'
+  }
+];
+
+function renderProducts() {
+  const grid = document.getElementById('productGrid');
+  grid.innerHTML = PRODUCTS.map((p, i) => `
+    <a class="card reveal ${i ? 'reveal-d1' : ''}" href="${STORE}/products/${p.handle}" target="_blank" rel="noopener">
+      <div class="card-stage"><img src="${p.image}" alt="${p.title} — Daily Dr!p" loading="lazy"></div>
+      <p class="card-type">${p.type}</p>
+      <h3>${p.title}</h3>
+      <p class="card-desc">${p.desc}</p>
+      <div class="card-rule"></div>
+      <p class="card-price">$${p.price}</p>
+      <span class="card-link">View Product</span>
+    </a>`).join('');
+  observeReveals();
+}
+
+async function tryLiveSync() {
+  try {
+    const res = await fetch(STORE + '/products.json');
+    if (!res.ok) return;
+    const data = await res.json();
+    PRODUCTS = data.products.map(p => ({
+      handle: p.handle,
+      title: p.title.replace(/^Ground Coffee\s*-\s*/i, '').replace(/LATIN BLEND/, 'Latin Blend'),
+      type: p.title.toLowerCase().includes('ground') ? 'Ground Coffee' : 'Whole Bean',
+      desc: (p.body_html || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim() || 'Colombian specialty coffee',
+      price: p.variants[0]?.price ?? '',
+      image: p.images[0]?.src ?? ''
+    }));
+    renderProducts();
+  } catch (e) { /* CORS-blocked when static — baked data stands */ }
+}
+
+/* ---------- Scroll reveal ---------- */
+let observer;
+function observeReveals() {
+  observer ??= new IntersectionObserver(entries => {
+    for (const en of entries) {
+      if (en.isIntersecting) { en.target.classList.add('in'); observer.unobserve(en.target); }
+    }
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+  document.querySelectorAll('.reveal:not(.in)').forEach(el => observer.observe(el));
+}
+
+/* ---------- Nav shade + parallax ---------- */
+const nav = document.getElementById('nav');
+const parallaxEls = () => document.querySelectorAll('[data-parallax]');
+let ticking = false;
+function onScroll() {
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+    for (const el of parallaxEls()) {
+      const r = el.parentElement.getBoundingClientRect();
+      const progress = (r.top + r.height / 2 - window.innerHeight / 2) / window.innerHeight;
+      el.style.transform = `translateY(${progress * -34}px)`;
+    }
+    ticking = false;
+  });
+}
+
+renderProducts();
+tryLiveSync();
+observeReveals();
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+</script>
+</body>
+</html>
